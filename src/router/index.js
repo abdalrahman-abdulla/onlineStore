@@ -1,24 +1,38 @@
 import Vue from "vue";
-import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
-
+import VueRouter from "vue-router"; 
+import store from "../store/index";
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
-    component: Home
-  },
-  {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
-  }
+    path: "/", 
+    component: () => import("../layouts/user.vue"),
+    children:[
+      {
+        path: "/",
+        name: "home",
+        component: () =>import("../pages/user/home.vue")
+      },
+      {
+        path: "/:sub_slug/items",
+        name: "shoping",
+        component: () =>import("../pages/user/shoping.vue")
+      },
+      {
+        path: "/checkout",
+        name: "checkout",
+        component: () =>import("../pages/user/checkout.vue"),
+        meta:{
+          checkout:true
+        }
+      },
+      {
+        path: "/:sub_slug/items/:item_slug",
+        name: "showitem",
+        component: () =>import("../pages/user/showItem.vue")
+      },  
+    ]
+  }, 
 ];
 
 const router = new VueRouter({
@@ -26,5 +40,20 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 });
-
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.checkout)) {
+    // if no token
+    if (!store.getters.get_cart[0]) {
+      //console.log("no token");
+      next({
+        path: "/"
+      });
+    } else {
+      next();
+    }
+  }  
+  else{
+    next()
+  }
+});
 export default router;
