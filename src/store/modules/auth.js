@@ -35,8 +35,7 @@ export default {
                 .then(res => {
                     commit("SET_token", res.data.access_token);
                     commit("SET_user", res.data.user);
-                    commit("SET_loggedIn", true);
-                    console.log(res)
+                    commit("SET_loggedIn", true); 
                     resolve(res);
                 })
                 .catch(err => {
@@ -58,8 +57,7 @@ export default {
                 .then(res => { 
                     commit("SET_token", res.data.access_token);
                     commit("SET_user", res.data.user);
-                    commit("SET_loggedIn", true);
-                    console.log(res.data)
+                    commit("SET_loggedIn", true); 
                     resolve(res);
                 })
                 .catch(err => { 
@@ -73,8 +71,7 @@ export default {
                 Service
                 .post("auth/logout")
                 .then(res => {  
-                resolve(res);
-                console.log(res)
+                resolve(res); 
                 })
                 .catch(err => {
                     commit("SET_loggedIn", '');
@@ -102,8 +99,7 @@ export default {
                     .post("auth/me")
                     .then(res => { 
                     commit("SET_user", res.data);
-                    commit("SET_loggedIn", true);
-                    console.log(res)
+                    commit("SET_loggedIn", true); 
                     resolve(res);
                     
                     })

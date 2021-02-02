@@ -70,10 +70,7 @@ export default {
             .dispatch("add_to_cart", {
             item: this.item,
             quantity: this.quantity
-            })
-            .catch(err => {
-                console.log(err)
-            });  
+            })  
             window.toast.fire({
                 icon: 'success',
                 title: 'تمت الاضافة الى السلة'

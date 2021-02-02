@@ -158,17 +158,14 @@ export default {
         }
     },
     mounted() {
-        console.log(this.cart=this.$store.getters.get_cart); 
+        this.cart=this.$store.getters.get_cart 
     }, 
     methods: {
         deleteFromCart(index){   
             this.$store
             .dispatch("remove_from_cart", {
             index: index, 
-            })
-            .catch(err => {
-                console.log(err)
-            });  
+            })   
             window.toast.fire({
                 icon: 'success',
                 title: 'تمت الاضافة الى السلة'
@@ -254,8 +251,7 @@ export default {
                     })
 
                 .then(function(res) {
-                // 3. Return res.id from the response 
-                    console.log(res)
+                // 3. Return res.id from the response  
                     return res.data.id;
                 });
             },

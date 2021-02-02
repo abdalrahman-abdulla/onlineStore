@@ -17,8 +17,8 @@
                     <ValidationProvider name="name" rules="required" v-slot="{ errors }"> 
                         <div class="input-group" :class="errors[0] ? 'invalid mt-1':'mb-3'">
                             <input type="text" name="name" v-model="name" class="form-control" placeholder="ادخل الاسم ..." >
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-envelope text-danger"></i></span>
                             </div>
                         </div>
                         <div class="input-group mb-2 mt-1  text-danger text-right" v-if="errors[0]"> 
@@ -28,14 +28,14 @@
                     <ValidationProvider name="email" rules="required" v-slot="{ errors }"> 
                         <div class="input-group" :class="errors[0] || err.email ? 'invalid mt-1':'mb-3'">
                             <input type="email" class="form-control" name="email" v-model="email" placeholder="ادخل الايميل ..." >
-                            <div class="input-group-prepend">
+                            <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                             </div>
                         </div>
-                        <div class="input-group mb-2 mt-1  text-danger text-right" v-if="errors[0] || err.email"> 
+                        <div class="input-group mb-2 mt-1  text-right" v-if="errors[0] || err.email"> 
                             <label class=" font-weight-bold w-100 error-msg">{{errors[0] || err.email[0] }}</label>
                         </div>  
-                    </ValidationProvider> 
+                    </ValidationProvider>
                     <ValidationProvider name="phone" rules="required|integer|length:11" v-slot="{ errors }">
                         <div class="input-group " :class="errors[0] || err.phone? 'invalid mt-1':'mb-3'"> 
                             <input type="text"  v-model="phone" class="form-control" placeholder="ادخل رقم الهاتف ..." >
@@ -48,7 +48,7 @@
                         </div>  
                     </ValidationProvider>
                     <ValidationProvider name="location" rules="required" v-slot="{ errors }">
-                        <div class="input-group "  :class="errors[0] ? 'invalid mt-1':'mb-3'"> 
+                        <div class="input-group "  :class="errors[0] ? 'invalid mt-1':'mb-3'" > 
                             <input type="text" v-model="location"  class="form-control" placeholder="ادخل العنوان ..." >
                             <div class="input-group-append"> 
                                 <span class="input-group-text"><i class="fas fa-location-arrow"></i></span>
@@ -60,7 +60,7 @@
                     </ValidationProvider>
                     <ValidationProvider name="password" rules="required|min:8" v-slot="{ errors }">
                         <div class="input-group "  :class="errors[0] ? 'invalid mt-1':'mb-3'"> 
-                            <input type="password"  v-model="password" class="form-control" placeholder="ادخل رقم الهاتف ..." >
+                            <input type="password"  v-model="password" class="form-control" placeholder="ادخل كلمة السر  ..." >
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
@@ -141,7 +141,7 @@ export default {
             })
             .catch(err => {
                 this.isLoading=false;
-                console.log(this.err=err.response.data.errors)
+                this.err=err.response.data.errors
             });  
             
         }
@@ -152,10 +152,7 @@ export default {
 <style lang='scss' scoped>
 
 @import '../assets/css/variables.scss';
-.error-msg{ 
-            font-size: 10px;  
-            color: #e10000;
-    }
+
 button.submit{
     background-color: $maincolor;
 }
@@ -199,4 +196,21 @@ input
 *{
             overflow: hidden;
         }
+.invalid{
+    input{
+        border:1px solid red;
+    }
+    input::placeholder{
+        color: red; 
+    } 
+    div span{
+        color: red;
+        border:1px solid red;
+    }
+    
+}
+.error-msg{ 
+    font-size: 10px;  
+    color: #e10000;
+}
 </style>

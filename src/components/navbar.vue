@@ -103,7 +103,7 @@ export default {
     mounted() {
         this.$store
             .dispatch("me");
-        Service.get('/categories').then((data) => { this.categories = data.data.data; console.log(data.data.data) })
+        Service.get('/categories').then((data) => { this.categories = data.data.data})
     },
     methods: {
         search(){

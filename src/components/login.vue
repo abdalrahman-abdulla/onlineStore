@@ -11,24 +11,43 @@
                 <div class="form-title text-center mb-4">
                 <h4 class="">تسجيل الدخول</h4>
                 </div>
-                <div class="d-flex flex-column text-center">
-                <form @submit.prevent="login()"> 
-                    <div class="input-group mb-3">
-                        <input type="email" v-model="email" class="form-control" placeholder="ادخل الايميل ..."  required>
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                <div class="d-flex flex-column text-center"> 
+                <ValidationObserver v-slot="{ handleSubmit }">
+                <form @submit.prevent="handleSubmit(login)"  >  
+                    <ValidationProvider name="email" rules="required" v-slot="{ errors }"> 
+                        <div class="input-group" :class="errors[0] ? 'invalid mt-1':'mb-3'">
+                            <input type="email" class="form-control" name="email" v-model="email" placeholder="ادخل الايميل ..." >
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="input-group mb-3"> 
-                        <input type="password" v-model="password" class="form-control" placeholder="ادخل كلمة السر ..."   required >
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        <div class="input-group mb-2 mt-1  text-right" v-if="errors[0]"> 
+                            <label class=" font-weight-bold w-100 error-msg">{{errors[0] }}</label>
+                        </div>  
+                    </ValidationProvider>
+                    <ValidationProvider name="password" rules="required|min:8" v-slot="{ errors }">
+                        <div class="input-group "  :class="errors[0] ? 'invalid mt-1':'mb-3'"> 
+                            <input type="password"  v-model="password" class="form-control" placeholder="ادخل كلمة السر  ..." >
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
                         </div>
+                        <div class="input-group mb-2 mt-1  text-right" v-if="errors[0]"> 
+                            <label class=" font-weight-bold w-100 error-msg">{{errors[0]}}</label>
+                        </div> 
+                    </ValidationProvider>
+                    <div class="input-group mb-2 mt-1  text-danger text-center" v-if="err"> 
+                        <label class=" font-weight-bold w-100 error-msg">خطأ في البريد الالكتروني او كلمة المرور </label>
                     </div>
                     <div class="text-danger error-sp" ></div>
-                    <button type="submit" class="btn submit btn-block btn-round text-white text-12"  >تسجيل الدخول</button>
+                    <button type="submit" class="btn submit btn-block btn-round text-white text-12"  >
+                        <span v-if="!isLoading">تسجيل الدخول</span>
+                        <div class="spinner-border text-light" role="status" v-if="isLoading">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </button>
                 </form>
-                
+                </ValidationObserver>
                 <div class="text-center text-muted delimiter d-none">or use a social network</div>
                 <div class=" social-buttons d-none">
                     <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Twitter">
@@ -61,18 +80,18 @@ export default {
     data() {
         return {
             email:'',
-            password:''
+            password:'',
+            err:'',
+            isLoading:false
         }
     },
-    methods: {
-        hi(){
-            console.log()
-        },
+    methods: { 
         signUp(){
             $('#loginModel').modal('hide')
             $('#signup').modal('show')
         },
         login(){
+            this.isLoading=true
             this.$store
             .dispatch("login", {
             email: this.email,
@@ -85,7 +104,8 @@ export default {
                 $('#loginModel').modal('hide')
             })
             .catch(err => {
-                console.log(err)
+                this.err=err.response.data.error
+                this.isLoading=false
             });  
             
         }
@@ -96,6 +116,7 @@ export default {
 <style lang='scss' scoped>
 
 @import '../assets/css/variables.scss';
+
 button.submit{
     background-color: $maincolor;
 }
@@ -135,10 +156,23 @@ input
     .modal-dialog .modal-content {
     padding: 1rem;
     }
+} 
+.invalid{
+    input{
+        border:1px solid red;
+    }
+    input::placeholder{
+        color: red; 
+    } 
+    div span{
+        color: red;
+        border:1px solid red;
+    }
+    
 }
-
-*{
-            overflow: hidden;
-        }
+.error-msg{ 
+        font-size: 10px;  
+        color: #e10000;
+    }
 
 </style>

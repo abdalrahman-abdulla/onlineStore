@@ -37,14 +37,12 @@ export default {
     },
     actions: {
         async add_to_cart({ commit }, payload){
-            return new Promise(() => {
-                console.log(payload)
+            return new Promise(() => { 
                 commit("add_to_cart", payload);
                 
             });
         },
-        remove_from_cart({ commit }, payload){ 
-            console.log(payload)
+        remove_from_cart({ commit }, payload){  
             commit("remove_from_cart", payload.index);
         }
     },

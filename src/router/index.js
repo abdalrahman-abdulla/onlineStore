@@ -41,10 +41,8 @@ const router = new VueRouter({
   routes
 });
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.checkout)) {
-    // if no token
-    if (!store.getters.get_cart[0]) {
-      //console.log("no token");
+  if (to.matched.some(record => record.meta.checkout)) { 
+    if (!store.getters.get_cart[0]) { 
       next({
         path: "/"
       });
