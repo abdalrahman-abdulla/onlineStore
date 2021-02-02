@@ -1,8 +1,9 @@
 //import Vue from "vue";
 import axios from "axios"; 
+import store from './store/index'
 axios.interceptors.request.use(config => {
     // config.baseURL = "https://station-api.herokuapp.com/api/";
-    config.baseURL = "http://127.0.0.1:8000/api/";
+    config.baseURL = store.getters.get_url + 'api/';
     config.headers.Authorization = `Bearer ${localStorage.getItem('token') || ''}`;
     return config;
 });

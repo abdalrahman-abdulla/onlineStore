@@ -44,7 +44,7 @@
                             </div> 
                         </div>
                         <div class="col-6 col-md-4 col-lg-2">
-                            <img class="card-img-top " :src='"http://127.0.0.1:8000/img/items/" + item.item.image' alt="Card image cap">
+                            <img class="card-img-top " :src='$store.getters.get_url+"img/items/" + item.item.image' alt="Card image cap">
                         </div>
                         <hr class="w-100">
                     </div>
@@ -259,11 +259,11 @@ export default {
             // 1. Add an onAuthorize callback
             onAuthorize: function(data) {
             // 2. Make a request to your server
-                return Service.post('http://127.0.0.1:8000/api/status', {
-                paymentID: data.paymentID,
-                payerID:   data.payerID,
-                cart: JSON.parse(localStorage.getItem('cart')),
-                user:JSON.parse(localStorage.getItem('user'))
+                return Service.post('status', {
+                    paymentID: data.paymentID,
+                    payerID:   data.payerID,
+                    cart: JSON.parse(localStorage.getItem('cart')),
+                    user:JSON.parse(localStorage.getItem('user'))
                 })
                 .then(function() { 
                     window.Swal.fire({

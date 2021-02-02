@@ -3,7 +3,8 @@ export default {
     state: {
         Loginstat: false,
         token: localStorage.getItem('token') || '',
-        user : localStorage.getItem('user')  || '',  
+        user : localStorage.getItem('user')  || '', 
+        bakendUrl:'http://127.0.0.1:8000/'
     },
     mutations: {
         SET_user(state, payload) {
@@ -120,6 +121,9 @@ export default {
         },
         get_token(state) {
             return state.token;
+        },
+        get_url(state) {
+            return state.bakendUrl;
         },
       }
 };

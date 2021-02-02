@@ -17,7 +17,7 @@
                 <div class="col-6 col-sm-4 col-md-3 m-0 p-1" v-for="(item, index) in items" :key="index" :class="item.price >= price.minPrice && item.price <= price.maxPrice ? '':'d-none'">
                     <router-link :to="{name:'showitem' ,params:{item_slug:item.slug,sub_slug:$route.params.sub_slug}}" class="text-decoration-none "  >
                         <div class="m-1 card h-100 border-0 p-0 text-right pt-4" >
-                            <img class="card-img-top w-100" :src='"http://127.0.0.1:8000/img/items/" + item.image' alt="Card image cap">
+                            <img class="card-img-top w-100" :src='$store.getters.get_url+"img/items/" + item.image' alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">{{item.name}}</h5>
                                 <p class="card-text  mb-2">{{item.description.length > 25 ? item.description.substring(0, 24) + "..." : item.description}}</p>
