@@ -87,7 +87,7 @@
                 <div v-for="(item,index) in homeData.items2" :key="index">
                     <router-link  class="m-1 card text-dark text-decoration-none  border-0 p-0 text-right pt-4"   :to="{name:'showitem' ,params:{item_slug:item.slug,sub_slug:item.subcategory.slug}}">
                         
-                        <img class="card-img-top " :src='$store.getters.get_url+"img/items/" + item.image' >
+                        <img class="card-img-top " :src='item.image' >
                         <div class="card-body ">
                             <h5 class="card-title  text-16 m-0">{{item.name.length > 25 ? item.name.substring(0, 24) + "..." : item.name}}</h5>
                             <p class="card-text text-12 my-1 text-secondary">{{item.description.length > 25 ? item.description.substring(0, 24) + "..." : item.description}}</p>
@@ -131,7 +131,7 @@
             <div class="container-fluid"> 
                 <div v-for="(item,index) in homeData.items" :key="index">
                     <router-link  class="m-1 card text-dark text-decoration-none  border-0 p-0 text-right pt-4"   :to="{name:'showitem' ,params:{item_slug:item.slug,sub_slug:item.subcategory.slug}}">
-                        <img class="card-img-top " :src='$store.getters.get_url+"img/items/" + item.image' >
+                        <img class="card-img-top " :src='item.image' >
                         <div class="card-body">
                             <h5 class="card-title  text-16 m-0 text-break">{{item.name.length > 25 ? item.name.substring(0, 24) + "..." : item.name}}</h5>
                             <p class="card-text text-12 my-1 text-secondary">{{item.description.length > 25 ? item.description.substring(0, 24) + "..." : item.description}}</p>

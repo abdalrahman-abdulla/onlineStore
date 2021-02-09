@@ -13,7 +13,7 @@
                 </router-link>  
             </div> 
             <div class="col-12 col-md-6">
-                <img :src='this.$store.getters.get_url+"img/items/" + item.image' alt="" class="w-75 img-item">
+                <img :src=' item.image' alt="" class="w-75 img-item">
             </div>
             <div class="col-12 col-md-6 text-right">
                 <div class="title">

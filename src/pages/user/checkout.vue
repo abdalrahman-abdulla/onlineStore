@@ -44,7 +44,7 @@
                             </div> 
                         </div>
                         <div class="col-6 col-md-4 col-lg-2">
-                            <img class="card-img-top " :src='$store.getters.get_url+"img/items/" + item.item.image' alt="Card image cap">
+                            <img class="card-img-top " :src='item.item.image' alt="Card image cap">
                         </div>
                         <hr class="w-100">
                     </div>
