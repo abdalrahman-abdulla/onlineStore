@@ -4,7 +4,8 @@ export default {
         Loginstat: false,
         token: localStorage.getItem('token') || '',
         user : localStorage.getItem('user')  || '', 
-        bakendUrl:'http://127.0.0.1:8000/'
+        //  bakendUrl:'http://127.0.0.1:8000/'
+        bakendUrl:'https://sleepy-headland-01669.herokuapp.com/'
     },
     mutations: {
         SET_user(state, payload) {
@@ -74,13 +75,7 @@ export default {
                 .then(res => {  
                 resolve(res); 
                 })
-                .catch(err => {
-                    commit("SET_loggedIn", '');
-                    commit("SET_user", ''); 
-                    commit("SET_token", '');
-                    localStorage.removeItem('token');
-                    localStorage.removeItem('user');
-                    location.reload();
+                .catch(err => { 
                     reject(err);
                 }).then(() => {
                     commit("SET_loggedIn", '');

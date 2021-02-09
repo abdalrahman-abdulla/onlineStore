@@ -194,9 +194,7 @@ export default {
                 else{
                     this.stat=this.stat+1;
                     $('.nav-item .active').addClass('disabled').parent().next().children('a').removeClass('disabled').click()
-                }
-                
-                
+                } 
             }
         },
         back(){
@@ -204,8 +202,7 @@ export default {
             {
                 this.stat-=1;
                 $('.nav-item .active').addClass('disabled').parent().prev().children('a').removeClass('disabled').click()   
-            }
-            
+            } 
         },
         statf(a){
             this.stat=a;
@@ -214,9 +211,7 @@ export default {
             localStorage.setItem('cart',JSON.stringify(this.cart))
             this.stat+=1;
             $('.nav-item .active').addClass('disabled').parent().next().children('a').removeClass('disabled').click()
-        }
-        
-
+        } 
     }, 
     computed:{
         subtotal(){

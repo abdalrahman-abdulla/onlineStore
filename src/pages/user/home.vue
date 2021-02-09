@@ -70,7 +70,7 @@
                         </router-link> 
                         
                         <div class="">
-                        <router-link class="text-dark text-decoration-none "  :to="{ name: 'shoping', params: { sub_slug: 'احذية نسائية' }}">
+                        <router-link class="text-dark text-decoration-none "  :to="{ name: 'shoping', params: { sub_slug: 'احذية-نسائية' }}">
                             <div class="">
                                 <img src="@/assets/images/p3.jpg" alt="" class="w-100">
                             </div>
