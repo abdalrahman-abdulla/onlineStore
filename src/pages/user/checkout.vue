@@ -11,7 +11,6 @@
                 
             </div> 
             <div class="row">
-                <!-- Nav tabs -->
                     <ul class="nav nav-tabs col-12  nav-justified">
                         <li class="nav-item">
                             <a class="nav-link active "  data-toggle="tab"  href="#stat1">تأكيد العناصر</a>
