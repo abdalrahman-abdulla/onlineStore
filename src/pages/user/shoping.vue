@@ -84,7 +84,6 @@ export default {
                 minPrice:0,
                 maxPrice:0,
             }
-            
         }
     },
     beforeCreate() {
@@ -112,8 +111,7 @@ export default {
                 }
             }
             this.revenues=this.temp;
-        }, 
-        
+        },
     },
     watch:{ 
         items(){
@@ -121,7 +119,6 @@ export default {
                 this.price.minPrice=this.items[0].price
                 if(element.price>this.price.maxPrice)
                     this.price.maxPrice=element.price;
-                
             }); 
         },  
     }
@@ -165,6 +162,5 @@ export default {
             color: $maincolor;
         }
     }
-    
 } 
 </style>

@@ -105,6 +105,7 @@ export default {
         border: 1px solid #f0f0f0; 
         margin: 10px;
     }
+    
     .about-list 
     {
         h6{

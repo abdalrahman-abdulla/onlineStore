@@ -1,6 +1,6 @@
-import Service from '../../Service'
+import Service from "../../Service";
 export default {
-    state: {
+    state:{
         Loginstat: false,
         token: localStorage.getItem('token') || '',
         user : localStorage.getItem('user')  || '', 
@@ -120,5 +120,5 @@ export default {
         get_url(state) {
             return state.bakendUrl;
         },
-      }
+    }
 };

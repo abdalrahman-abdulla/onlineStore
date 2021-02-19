@@ -164,11 +164,11 @@ export default {
         deleteFromCart(index){   
             this.$store
             .dispatch("remove_from_cart", {
-            index: index, 
+                index: index, 
             })   
             window.toast.fire({
                 icon: 'success',
-                title: 'تمت الاضافة الى السلة'
+                title: 'تمت الازالة من السلة'
             })
             if(!this.$store.getters.get_cart[0]){
                 this.$router.push({name:'home'})
@@ -226,7 +226,6 @@ export default {
         }
     },
     created() {
-
         window.paypal.Button.render({
             env: 'sandbox', // Or 'production'
             // Set up the payment:
@@ -348,32 +347,29 @@ export default {
 {
     font-weight: 900;
 }
-
 .option{
     font-size: 10px;
 }
-
 @media screen and (max-width: 576px) { 
-.price{
-    font-size: 11px;
-    font-weight: 700;
-}
-.desc
-{
-    font-size: 8px;
-}
-.nav-item{
-    font-size: 13px;
-}
-
-.items {
-    input 
+    .price{
+        font-size: 11px;
+        font-weight: 700;
+    }
+    .desc
     {
-        width: 30%; 
-        text-align: center;
-    }  
-}
+        font-size: 8px;
+    }
+    .nav-item{
+        font-size: 13px;
+    }
 
+    .items {
+        input 
+        {
+            width: 30%; 
+            text-align: center;
+        }  
+    }
 }
 
 </style>

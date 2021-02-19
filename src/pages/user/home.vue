@@ -154,7 +154,6 @@ export default {
     data() {
         return {
             homeData:[],
-
         }
     },
     beforeCreate() {
@@ -162,9 +161,6 @@ export default {
             this.homeData=data.data 
         })
     },
-    methods: {
-    
-    }
 };
 </script>
 <style lang="scss" scoped> 
@@ -233,20 +229,19 @@ export default {
 } 
 
 @media screen and (max-width: 768px) { 
-    .icons{  
-            .icon-item
-            {  
-                div{ 
-                    font-size: 30px !important;  
-                    padding: 13px; 
-                }  
-            } 
-            .icon-title{
-                font-size: 11px !important; 
-            }
+.icons{  
+        .icon-item
+        {  
+            div{ 
+                font-size: 30px !important;  
+                padding: 13px; 
+            }  
+        } 
+        .icon-title{
+            font-size: 11px !important; 
         }
-    } 
-
+    }
+} 
 .section{
     box-shadow: 0px 0px 26px -10px;
    .w-21
@@ -262,8 +257,6 @@ export default {
         width: 50.6% !important;
     } 
 }
-
-
 @media screen and (max-width: 768px) {
     .section{ 
     .w-21
@@ -280,8 +273,6 @@ export default {
     }
     }
 } 
-
-
 .cloths { 
         .container-fluid::-webkit-scrollbar {
             display: none;
@@ -306,8 +297,6 @@ export default {
             display: inline-block;
         }
 }
-
-
 .section-2{
     box-shadow: 0px 0px 26px -10px;
    .w-36
@@ -319,8 +308,6 @@ export default {
         width: 26.6% !important;
     } 
 }
-
-
 @media screen and (max-width: 768px) {
     .section-2{ 
         .w-36

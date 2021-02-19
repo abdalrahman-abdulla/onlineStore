@@ -80,8 +80,8 @@ export default {
     },
     beforeCreate() {
         Service.get('/items/'+this.$route.params.item_slug).then(data => {
-                this.item=data.data.data;  
-            })
+            this.item=data.data.data;  
+        })
     },
 }; 
 </script>
