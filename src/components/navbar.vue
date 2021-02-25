@@ -99,8 +99,7 @@ export default {
             return this.$store.getters.get_user;
         }
     }, 
-    mounted() {
-        console.log(process.env.VUE_APP_API)
+    mounted() { 
         this.$store
             .dispatch("me");
         this.$service.get('/categories').then((data) => { this.categories = data.data.data})
