@@ -13,18 +13,18 @@
             <div class="row">
                     <ul class="nav nav-tabs col-12  nav-justified">
                         <li class="nav-item">
-                            <a class="nav-link active "  data-toggle="tab"  href="#stat1">تأكيد العناصر</a>
+                            <a class="nav-link" :class="stat==1?'active':'disabled'" data-toggle="tab"  href="#stat1">تأكيد العناصر</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link disabled" data-toggle="tab"   href="#stat2">معلومات المشتري</a>
+                            <a class="nav-link" :class="stat==2?'active':'disabled'" data-toggle="tab"   href="#stat2">معلومات المشتري</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link disabled" data-toggle="tab" href="#stat3">اتمام الدفع</a>
+                            <a class="nav-link" :class="stat==3?'active':'disabled'" data-toggle="tab" href="#stat3">اتمام الدفع</a>
                         </li>
                     </ul> 
             </div>
             <div class="row tab-content">
-                <div class="col-12 items my-3 tab-pane active" id="stat1">
+                <div class="col-12 items my-3 tab-pane" :class="stat==1 ? 'active':''" id="stat1">
                     <div class="row" v-for="(item, index) in cart" :key="index">
                         
                         <div class="col-6 col-md-8 col-lg-10 text-right align-self-center">
@@ -35,7 +35,7 @@
                                 {{$parent.
                                 $parent.formatToCurrency(item.item.price)}}
                             </div>
-                            <p class="desc mb-2">{{item.item.description}}</p>
+                            <p class="desc mb-2">{{item.item.description  | strLen}}</p>
                             <div class="d-flex justify-content-between">
                                 
                                 <button class="btn btn-danger btn-sm px-3" @click="deleteFromCart(index)">حذف</button>
@@ -48,7 +48,7 @@
                         <hr class="w-100">
                     </div>
                 </div>
-                <div class="user-info  col-12 p-0 p-md-3 tab-pane " id="stat2" >
+                <div class="user-info  col-12 p-0 p-md-3 tab-pane " :class="stat==2?'active':''" id="stat2" >
                     <div class="card bg-dark text-right  m-md-3 my-3">
                         <div class="card-body pb-2">
                             <div class="title  text-white">
@@ -99,7 +99,7 @@
                         </div>
                     </div> 
                 </div>
-                <div class="summary   col-12  p-0 p-md-3 tab-pane " id="stat3">
+                <div class="summary   col-12  p-0 p-md-3 tab-pane " :class="stat==3?'active':''" id="stat3">
                     <div class="card bg-dark text-right   m-md-3 my-3">
                         <div class="card-body ">
                             <div class="title  text-white">
@@ -128,8 +128,8 @@
                     
                 </div>
 
-                <button class="btn mx-auto btn-danger btn-sm option px-3" :class="stat==1 ? 'd-none':''" @click="back()">الرجوع</button>
-                <button class="btn mx-auto btn-success btn-sm option px-3"  :class="stat==3 ? 'd-none':''" @click="next()">اكمال الشراء</button>
+                <button class="btn mx-auto btn-danger btn-sm option px-3" v-show="stat!=1" @click="back()">الرجوع</button>
+                <button class="btn mx-auto btn-success btn-sm option px-3"  v-show="stat!=3"  @click="next()">اكمال الشراء</button>
             </div>
             
             
@@ -177,9 +177,7 @@ export default {
             if(this.stat<3)
             {
                 if(this.stat==1){
-                    localStorage.setItem('cart',JSON.stringify(this.cart))
-                    this.stat=this.stat+1;
-                    $('.nav-item .active').addClass('disabled').parent().next().children('a').removeClass('disabled').click()  
+                    localStorage.setItem('cart',JSON.stringify(this.cart)) 
                 }
                 else if(this.stat==2){
                     if(this.user_log.name){
@@ -189,18 +187,15 @@ export default {
                     localStorage.setItem('user',JSON.stringify(this.user)) 
                     localStorage.setItem('cart',JSON.stringify(this.cart)) 
                     $('#user_form').click()
+                    return;
                 } 
-                else{
-                    this.stat=this.stat+1;
-                    $('.nav-item .active').addClass('disabled').parent().next().children('a').removeClass('disabled').click()
-                } 
+                this.stat=this.stat+1; 
             }
         },
         back(){
             if(this.stat>1)
             {
                 this.stat-=1;
-                $('.nav-item .active').addClass('disabled').parent().prev().children('a').removeClass('disabled').click()   
             } 
         },
         statf(a){
@@ -209,7 +204,6 @@ export default {
         onSubmit(){
             localStorage.setItem('cart',JSON.stringify(this.cart))
             this.stat+=1;
-            $('.nav-item .active').addClass('disabled').parent().next().children('a').removeClass('disabled').click()
         } 
     }, 
     computed:{

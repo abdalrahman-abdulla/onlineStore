@@ -90,8 +90,8 @@
                         <img class="card-img-top " :src='item.image' >
                         <div class="card-body ">
                             <h5 class="card-title  text-16 m-0">{{item.name.length > 25 ? item.name.substring(0, 24) + "..." : item.name}}</h5>
-                            <p class="card-text text-12 my-1 text-secondary">{{item.description.length > 25 ? item.description.substring(0, 24) + "..." : item.description}}</p>
-                            <p class="card-text price text-14 font-weight-bold" >{{ $parent.$parent.formatToCurrency(item.price) }}</p>
+                            <p class="card-text text-12 my-1 text-secondary">{{item.description | strLen}}</p>
+                            <p class="card-text price text-14 font-weight-bold" >{{ formatToCurrency(item.price) }}</p>
                         </div>
                     </router-link> 
                 </div>  
@@ -134,8 +134,8 @@
                         <img class="card-img-top " :src='item.image' >
                         <div class="card-body">
                             <h5 class="card-title  text-16 m-0 text-break">{{item.name.length > 25 ? item.name.substring(0, 24) + "..." : item.name}}</h5>
-                            <p class="card-text text-12 my-1 text-secondary">{{item.description.length > 25 ? item.description.substring(0, 24) + "..." : item.description}}</p>
-                            <p class="card-text price text-14 font-weight-bold" >{{ $parent.$parent.formatToCurrency(item.price) }}</p>
+                            <p class="card-text text-12 my-1 text-secondary">{{item.description | strLen}}</p>
+                            <p class="card-text price text-14 font-weight-bold" >{{ formatToCurrency(item.price) }}</p>
                         </div>
                     </router-link> 
                 </div>  
@@ -147,8 +147,7 @@
 
 <script>
 // @ is an alias to /src 
-import 'jquery'
-import Service from '../../Service'
+import 'jquery' 
 export default {
     name: "Home",
     data() {
@@ -157,7 +156,7 @@ export default {
         }
     },
     beforeCreate() {
-        Service.get('homedata').then(data => {
+        this.$service.get('homedata').then(data => {
             this.homeData=data.data 
         })
     },

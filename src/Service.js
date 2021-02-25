@@ -1,8 +1,7 @@
 //import Vue from "vue";
-import axios from "axios"; 
-import store from './store/index'
+import axios from "axios"
 axios.interceptors.request.use(config => { 
-    config.baseURL = store.getters.get_url + 'api/'
+    config.baseURL = process.env.VUE_APP_API + 'api/'
     config.headers.Authorization = `Bearer ${localStorage.getItem('token') || ''}`
     return config
 }) 

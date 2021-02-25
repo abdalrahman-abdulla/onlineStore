@@ -18,7 +18,7 @@
                         <div class="input-group" :class="errors[0] ? 'invalid mt-1':'mb-3'">
                             <input type="text" name="name" v-model="name" class="form-control" placeholder="ادخل الاسم ..." >
                             <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-envelope text-danger"></i></span>
+                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                             </div>
                         </div>
                         <div class="input-group mb-2 mt-1  text-danger text-right" v-if="errors[0]"> 

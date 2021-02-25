@@ -24,9 +24,7 @@ export default {
     FooterNav
   },
   methods: {
-    formatToCurrency(amount){
-        return 'IQD '+(amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').slice(0, -3); 
-    }
+    
   },
   mounted() { 
   },

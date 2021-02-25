@@ -20,7 +20,7 @@
                     {{item.name}}
                 </div>
                 <div class="mt-1 price title" >
-                    {{ $parent.$parent.formatToCurrency(item.price) }}
+                    {{ formatToCurrency(item.price) }}
                 </div>
                 <hr>
                 <div class="row text-right px-4 d-flex flex-column">
@@ -51,10 +51,7 @@
     </div>
 </template>
 
-<script>
-// @ is an alias to /src
-//import $ from 'jquery';
-import Service from "../../Service";
+<script> 
 export default {
     name: "showItem",
     data() {
@@ -79,7 +76,7 @@ export default {
         }
     },
     beforeCreate() {
-        Service.get('/items/'+this.$route.params.item_slug).then(data => {
+        this.$service.get('/items/'+this.$route.params.item_slug).then(data => {
             this.item=data.data.data;  
         })
     },

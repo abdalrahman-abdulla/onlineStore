@@ -20,8 +20,8 @@
                             <img class="card-img-top w-100" :src='item.image' alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title mb-2">{{item.name}}</h5>
-                                <p class="card-text  mb-2">{{item.description.length > 25 ? item.description.substring(0, 24) + "..." : item.description}}</p>
-                                <p class="card-text price">{{ $parent.$parent.formatToCurrency(item.price) }}</p>
+                                <p class="card-text  mb-2">{{item.description | strLen}}</p>
+                                <p class="card-text price">{{ formatToCurrency(item.price) }}</p>
                             </div>
                         </div>
                     </router-link>
@@ -72,8 +72,7 @@
     </div>
 </template>
 
-<script> 
-import Service from '../../Service' 
+<script>
 export default {
     name: "shoping",
     data() {
@@ -87,7 +86,7 @@ export default {
         }
     },
     beforeCreate() {
-        Service.get('/'+this.$route.params.sub_slug+'/items').then(data => {
+        this.$service.get('/'+this.$route.params.sub_slug+'/items').then(data => {
                 if(data.data.data){
                     this.items=data.data.data;
                 }

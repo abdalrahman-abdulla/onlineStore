@@ -13,7 +13,7 @@
         </ul>
         <div class="about row m-0 w-100 pt-4">
             <div class="container-fluid d-flex flex-column flex-lg-row d justify-content-around" >
-                    <div class="text-right about-list" v-for="index in [1,2,3,4]" :key="index">
+                    <div class="text-right about-list" v-for="index in [1,2,3,4]" :key="index" >
                         <h6>فئات التسوق<a :href="'#demo' + index" class="float-left d-md-none" data-toggle="collapse"><i class="fas fa-caret-down fa-fw"></i></a></h6>
                         
                         <ul :id="'demo' + index" class="collapse d-md-block" >

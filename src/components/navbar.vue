@@ -76,8 +76,7 @@
 <script>
 import Login from './login'
 import Signup from './signup'
-import $ from 'jquery';
-import Service from '../Service'
+import $ from 'jquery'
 import router from '../router/index'
 export default {
     name:'navbar',
@@ -101,9 +100,10 @@ export default {
         }
     }, 
     mounted() {
+        console.log(process.env.VUE_APP_API)
         this.$store
             .dispatch("me");
-        Service.get('/categories').then((data) => { this.categories = data.data.data})
+        this.$service.get('/categories').then((data) => { this.categories = data.data.data})
     },
     methods: {
         search(){

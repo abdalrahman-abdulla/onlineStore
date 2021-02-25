@@ -3,25 +3,24 @@ export default {
     state:{
         Loginstat: false,
         token: localStorage.getItem('token') || '',
-        user : localStorage.getItem('user')  || '', 
-        //  bakendUrl:'http://127.0.0.1:8000/'
-        bakendUrl:'https://sleepy-headland-01669.herokuapp.com/'
+        user : localStorage.getItem('user')  || ''
     },
     mutations: {
-        SET_user(state, payload) {
-            state.user = payload;
+        SET_AUTH(state, payload) {
+            state.user = payload.user;
             localStorage.setItem(
                 "user",
                 state.user
             )
-        },
-        SET_token(state, payload) {
-            state.token = payload;
-            localStorage.setItem(
-                "token",
-                state.token
-            )
-        },
+            if(payload.access_token){
+                state.token = payload.access_token;
+                localStorage.setItem(
+                    "token",
+                    state.token
+                )
+            }
+            
+        }, 
         SET_loggedIn(state, payload) {
             state.loggedIn = payload;
         }
@@ -30,14 +29,9 @@ export default {
         async login({ commit }, payload){
             return new Promise((resolve, reject) => {
                 Service
-                .post("auth/login", {
-                    email: payload.email,
-                    password: payload.password
-                })
+                .post("auth/login",payload)
                 .then(res => {
-                    commit("SET_token", res.data.access_token);
-                    commit("SET_user", res.data.user);
-                    commit("SET_loggedIn", true); 
+                    commit("SET_AUTH", res.data); 
                     resolve(res);
                 })
                 .catch(err => {
@@ -48,23 +42,15 @@ export default {
         async signup({commit }, payload){
             return new Promise((resolve, reject) => {
                 Service
-                .post("auth/register", {
-                    email: payload.email,
-                    password: payload.password,
-                    name: payload.name,
-                    phone: payload.phone,
-                    location: payload.location, 
-
-                })
+                .post("auth/register",payload)
                 .then(res => { 
-                    commit("SET_token", res.data.access_token);
-                    commit("SET_user", res.data.user);
-                    commit("SET_loggedIn", true); 
+                    console.log(res)
+                    commit("SET_AUTH", res.data); 
                     resolve(res);
                 })
                 .catch(err => { 
                     reject(err);  
-                });
+                }); 
             });
         },
         logout({ commit  }){
@@ -77,10 +63,8 @@ export default {
                 })
                 .catch(err => { 
                     reject(err);
-                }).then(() => {
-                    commit("SET_loggedIn", '');
-                    commit("SET_user", ''); 
-                    commit("SET_token", '');
+                }).then(() => { 
+                    commit("SET_AUTH", {user:'',access_token:''});
                     localStorage.removeItem('token');
                     localStorage.removeItem('user');
                     location.reload();
@@ -93,11 +77,9 @@ export default {
                 return new Promise((resolve) => {
                     Service
                     .post("auth/me")
-                    .then(res => { 
-                    commit("SET_user", res.data);
-                    commit("SET_loggedIn", true); 
-                    resolve(res);
-                    
+                    .then(res => {
+                    commit("SET_AUTH", {user:res.data}); 
+                    resolve(res.data)
                     })
                     .catch(() => {
                         dispatch('logout')
@@ -116,9 +98,6 @@ export default {
         },
         get_token(state) {
             return state.token;
-        },
-        get_url(state) {
-            return state.bakendUrl;
         },
     }
 };

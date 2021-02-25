@@ -2,7 +2,6 @@
 export default {
     state: {
         cart:JSON.parse(localStorage.getItem('cart')) || [],
-        count:JSON.parse(localStorage.getItem('cart')) ? JSON.parse(localStorage.getItem('cart')).length : 0
     },
     mutations: {
         add_to_cart(state, payload) {
@@ -12,18 +11,13 @@ export default {
             if (productInCart) {
                 productInCart.quantity*1;
                 productInCart.quantity += (payload.quantity*1);
-                return;
-            }
-            state.cart.push(payload);
-            state.count++;
+            } else{
+                state.cart.push(payload); 
+            } 
             localStorage.setItem(
                 "cart",
                 JSON.stringify(state.cart)
-            )
-            localStorage.setItem(
-                "cart_count",
-                JSON.stringify(state.count)
-            )
+            ) 
 
         },
         remove_from_cart(state,index){
@@ -31,15 +25,13 @@ export default {
             localStorage.setItem(
                 "cart",
                 JSON.stringify(state.cart)
-            )
-            state.count--; 
+            ) 
         }
     },
     actions: {
-        async add_to_cart({ commit }, payload){
+        add_to_cart({ commit }, payload){
             return new Promise(() => { 
                 commit("add_to_cart", payload);
-                
             });
         },
         remove_from_cart({ commit }, payload){  
@@ -50,8 +42,8 @@ export default {
         get_cart(state) {
             return state.cart;
         },
-        get_count(state){
-            return state.count;
+        get_count(){
+            return JSON.parse(localStorage.getItem('cart')).length;
         }
     }
 };
